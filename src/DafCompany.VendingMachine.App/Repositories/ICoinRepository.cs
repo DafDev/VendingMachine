@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DafCompany.VendingMachine.App.Enumerations;
+using DafCompany.VendingMachine.App.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DafCompany.VendingMachine.App.Repositories
 {
-    interface ICoinRepository
+    public interface ICoinRepository
     {
+        IEnumerable<CoinRoll> GetCoinRolls();
+        CoinRoll GetCoinRoll(CoinDenomination coinDenomination);
     }
 }

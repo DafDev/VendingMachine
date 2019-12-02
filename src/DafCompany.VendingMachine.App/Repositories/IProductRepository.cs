@@ -1,10 +1,13 @@
-﻿using System;
+﻿using DafCompany.VendingMachine.App.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DafCompany.VendingMachine.App.Repositories
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
+        IEnumerable<Product> GetProducts();
+        IEnumerable<Product> GetParticularProduct();
     }
 }
