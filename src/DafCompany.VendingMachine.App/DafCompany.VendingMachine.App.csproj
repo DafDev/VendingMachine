@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enumerations\" />
     <Folder Include="Loaders\" />
     <Folder Include="Models\" />
     <Folder Include="Repositories\" />
