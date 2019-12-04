@@ -7,7 +7,7 @@ namespace DafCompany.VendingMachine.App.Loaders
 {
     interface IProductLoader
     {
-        IEnumerable<Product> LoadAll(int numberOfLoadedProducts = 100);
-        IEnumerable<Product> LoadProduct(int productId, int numberOfLoadedProducts = 100);
+        IEnumerable<ProductStack> LoadAll(int numberOfLoadedProducts = 100);
+        ProductStack LoadProduct(int productId, int numberOfLoadedProducts = 100);
     }
 }
