@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DafCompany.VendingMachine.App.Services
 {
-    public interface IVendingMachine
+    public interface IVendingMachineService
     {
         void GetMoney(double money);
         IEnumerable<Coin> GiveChange();

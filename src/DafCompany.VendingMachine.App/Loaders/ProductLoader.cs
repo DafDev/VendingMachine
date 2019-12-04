@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DafCompany.VendingMachine.UnitTests.Loaders
+namespace DafCompany.VendingMachine.App.Loaders
 {
     public class ProductLoader
     {

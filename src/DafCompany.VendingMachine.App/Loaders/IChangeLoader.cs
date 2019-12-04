@@ -6,7 +6,7 @@ namespace DafCompany.VendingMachine.App.Loaders
 {
     public interface IChangeLoader
     {
-        IEnumerable<CoinRoll> loadAll();
-        IEnumerable<CoinRoll> loadCoinRoll(CoinDenomination coinDenomination);
+        IEnumerable<CoinRoll> LoadAll(int numberOfLoadedCoins = 100);
+        CoinRoll LoadCoinRoll(CoinDenomination coinDenomination, int numberOfLoadedCoins = 100);
     }
 }

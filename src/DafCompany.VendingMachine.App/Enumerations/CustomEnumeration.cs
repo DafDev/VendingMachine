@@ -6,19 +6,19 @@ using System.Text;
 
 namespace DafCompany.VendingMachine.App.Enumerations
 {
-    public class Enumeration : IComparable
+    public class CustomEnumeration : IComparable
     {
         public string Name { get; private set; }
         public int Id { get; private set; }
 
-        protected Enumeration(string name, int id)
+        protected CustomEnumeration(string name, int id)
         {
             Name = name;
             Id = id;
         }
 
         public override string ToString() => Name;
-        public static IEnumerable<T> GetAll<T>() where T : Enumeration
+        public static IEnumerable<T> GetAll<T>() where T : CustomEnumeration
         {
             var fields = typeof(T).GetFields(BindingFlags.Public |
                                              BindingFlags.Static |
@@ -32,12 +32,12 @@ namespace DafCompany.VendingMachine.App.Enumerations
             {
                 return -1;
             }
-            return Id.CompareTo(((Enumeration)other).Id);
+            return Id.CompareTo(((CustomEnumeration)other).Id);
         }
 
         public override bool Equals(object obj)
         {
-            Enumeration otherValue = obj as Enumeration;
+            CustomEnumeration otherValue = obj as CustomEnumeration;
 
             if(otherValue == null)
             {
@@ -50,7 +50,7 @@ namespace DafCompany.VendingMachine.App.Enumerations
             return typeMatches && idMatches;
         }
 
-        public static bool operator ==(Enumeration left, Enumeration right)
+        public static bool operator ==(CustomEnumeration left, CustomEnumeration right)
         {
             if(ReferenceEquals(left,right))
             {
@@ -62,26 +62,26 @@ namespace DafCompany.VendingMachine.App.Enumerations
             }
         }
 
-        public static bool operator !=(Enumeration left, Enumeration right)
+        public static bool operator !=(CustomEnumeration left, CustomEnumeration right)
         {
             return !(left == right);
         }
 
-        public static bool operator >(Enumeration left, Enumeration right)
+        public static bool operator >(CustomEnumeration left, CustomEnumeration right)
         {
             throw new NotImplementedException();
         }
 
-        public static bool operator <(Enumeration left, Enumeration right)
+        public static bool operator <(CustomEnumeration left, CustomEnumeration right)
         {
             throw new NotImplementedException();
         }
-        public static bool operator >=(Enumeration left, Enumeration right)
+        public static bool operator >=(CustomEnumeration left, CustomEnumeration right)
         {
             throw new NotImplementedException();
         }
 
-        public static bool operator <=(Enumeration left, Enumeration right)
+        public static bool operator <=(CustomEnumeration left, CustomEnumeration right)
         {
             throw new NotImplementedException();
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DafCompany.VendingMachine.App.Services
 {
-    public class VendingMachine
+    public class VendingMachineService
     {
     }
 }
