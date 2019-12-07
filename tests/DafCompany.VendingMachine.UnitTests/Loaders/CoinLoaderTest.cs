@@ -11,13 +11,13 @@ using Xunit;
 
 namespace DafCompany.VendingMachine.UnitTests.Loaders
 {
-    public class ChangeLoaderTest
+    public class CoinLoaderTest
     {
         [Fact]
         public void LoadAll_Should_Get_All_CoinDenomination()
         {
             //arrange
-            ChangeLoader changeLoader = new ChangeLoader();
+            CoinLoader changeLoader = new CoinLoader();
             //act
             IEnumerable<CoinRoll> coinRolls = changeLoader.LoadAll();
             //assert
@@ -27,7 +27,7 @@ namespace DafCompany.VendingMachine.UnitTests.Loaders
         [Theory, AutoData]
         public void LoadCoinRoll_Should_Get_Expected_CoinDenomination_and_100_coins(CoinDenomination coinDenomination)
         {
-            ChangeLoader changeLoader = new ChangeLoader();
+            CoinLoader changeLoader = new CoinLoader();
             //act
             CoinRoll coinRoll = changeLoader.LoadCoinRoll(coinDenomination);
             //assert
@@ -39,7 +39,7 @@ namespace DafCompany.VendingMachine.UnitTests.Loaders
         [InlineData(100)]
         public void LoadAll_Gets_ExpectedNumber_Of_Coins_Per_CoinRoll(int expectedNumberOfCoins)
         {
-            ChangeLoader changeLoader = new ChangeLoader();
+            CoinLoader changeLoader = new CoinLoader();
             IEnumerable<CoinRoll> coinRolls = changeLoader.LoadAll(expectedNumberOfCoins);
             coinRolls.Select(p => p.Count).Should().AllBeEquivalentTo(expectedNumberOfCoins);
         }

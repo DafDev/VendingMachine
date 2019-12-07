@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DafCompany.VendingMachine.App.Loaders
 {
-    interface IProductLoader
+    public interface IProductLoader
     {
         IEnumerable<ProductStack> LoadAll(int numberOfLoadedProducts = 100);
-        ProductStack LoadProduct(int productId, int numberOfLoadedProducts = 100);
+        ProductStack LoadProduct(Product product, int numberOfLoadedProducts = 100);
     }
 }

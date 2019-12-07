@@ -9,9 +9,9 @@ namespace DafCompany.VendingMachine.App.Models
         public Product Product { get; set; }
         public int Count { get; set; }
 
-        public ProductStack(Product coin, int count)
+        public ProductStack(Product product, int count)
         {
-            Product = coin;
+            Product = product;
             Count = count;
         }
     }

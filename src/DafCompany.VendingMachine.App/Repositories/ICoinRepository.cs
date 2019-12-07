@@ -7,6 +7,6 @@ namespace DafCompany.VendingMachine.App.Repositories
     public interface ICoinRepository
     {
         IEnumerable<CoinRoll> GetCoinRolls();
-        CoinRoll GetCoinRoll(CoinDenomination coinDenomination);
+        CoinRoll GetCoinRoll(CoinDenomination coinDenomination, int count = 100);
     }
 }

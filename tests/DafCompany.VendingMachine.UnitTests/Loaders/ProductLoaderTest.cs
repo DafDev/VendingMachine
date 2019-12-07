@@ -28,7 +28,7 @@ namespace DafCompany.VendingMachine.UnitTests.Loaders
         {
             ProductLoader productLoader = new ProductLoader();
             //act
-            ProductStack productStack = productLoader.LoadProduct(product1.Id);
+            ProductStack productStack = productLoader.LoadProduct(product1);
             //assert
             productStack.Product.Should().Be(product1);
             productStack.Count.Should().Be(100);

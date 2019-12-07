@@ -1,7 +1,4 @@
 ﻿using DafCompany.VendingMachine.App.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DafCompany.VendingMachine.App.Models
 {

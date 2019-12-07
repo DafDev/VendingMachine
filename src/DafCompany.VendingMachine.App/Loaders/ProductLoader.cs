@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using DafCompany.VendingMachine.App.Models;
 
 namespace DafCompany.VendingMachine.App.Loaders
@@ -9,12 +8,22 @@ namespace DafCompany.VendingMachine.App.Loaders
     {
         public IEnumerable<ProductStack> LoadAll(int numberOfLoadedProducts = 100)
         {
-            throw new NotImplementedException();
+            Product snickers = new Product("Snickers", 2.5);
+            Product coke = new Product("Coca-Cola", 1.25);
+            Product lays = new Product("Lays", 2);
+            Product dragibus = new Product("Dragibus", 1.30);
+            return new List<ProductStack>
+            {
+                new ProductStack(snickers, numberOfLoadedProducts),
+                new ProductStack(coke, numberOfLoadedProducts),
+                new ProductStack(lays, numberOfLoadedProducts),
+                new ProductStack(dragibus, numberOfLoadedProducts),
+            };
         }
 
-        public ProductStack LoadProduct(int productId, int numberOfLoadedProducts = 100)
+        public ProductStack LoadProduct(Product product, int numberOfLoadedProducts = 100)
         {
-            throw new NotImplementedException();
+            return new ProductStack(product, numberOfLoadedProducts);
         }
     }
 }

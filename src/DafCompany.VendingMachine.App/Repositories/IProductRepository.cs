@@ -7,7 +7,8 @@ namespace DafCompany.VendingMachine.App.Repositories
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetProducts();
-        IEnumerable<Product> GetParticularProduct();
+        IEnumerable<ProductStack> StoreProductsFromLoader();
+        Product GetProduct(int id);
+        ProductStack GetProductStackFromLoader(Product product, int count);
     }
 }

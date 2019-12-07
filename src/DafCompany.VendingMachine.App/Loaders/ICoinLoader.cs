@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DafCompany.VendingMachine.App.Loaders
 {
-    public interface IChangeLoader
+    public interface ICoinLoader
     {
         IEnumerable<CoinRoll> LoadAll(int numberOfLoadedCoins = 100);
         CoinRoll LoadCoinRoll(CoinDenomination coinDenomination, int numberOfLoadedCoins = 100);
