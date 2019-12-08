@@ -8,5 +8,7 @@ namespace DafCompany.VendingMachine.App.Repositories
     {
         IEnumerable<CoinRoll> GetCoinRolls();
         CoinRoll GetCoinRoll(CoinDenomination coinDenomination, int count = 100);
+        IEnumerable<Coin> GetCoins(double change);
+        void PutCoins(double change);
     }
 }

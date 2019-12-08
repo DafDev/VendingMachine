@@ -10,5 +10,6 @@ namespace DafCompany.VendingMachine.App.Repositories
         IEnumerable<ProductStack> StoreProductsFromLoader();
         Product GetProduct(int id);
         ProductStack GetProductStackFromLoader(Product product, int count);
+        IEnumerable<Product> GetProducts();
     }
 }

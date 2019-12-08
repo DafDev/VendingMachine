@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DafCompany.VendingMachine.App.Loaders;
 using DafCompany.VendingMachine.App.Models;
 
@@ -26,12 +24,13 @@ namespace DafCompany.VendingMachine.App.Repositories
 
         public Product GetProduct(int id)
         {
-            Product product = _productStacksInMemoryRepo.FirstOrDefault(p => p.Product.Id == id).Product;
-            if (product != null)
+            ProductStack productStack = _productStacksInMemoryRepo.FirstOrDefault(p => p.Product.Id == id);
+            if (productStack != null && productStack.Count > 0)
             {
                 _productStacksInMemoryRepo.FirstOrDefault(p => p.Product.Id == id).Count--;
+                return productStack.Product;
             }
-            return product;
+            return null;
         }
 
         public IEnumerable<ProductStack> StoreProductsFromLoader()
@@ -51,6 +50,16 @@ namespace DafCompany.VendingMachine.App.Repositories
                 _productStacksInMemoryRepo.Add(productStack);
             }
             return productStack;
+        }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            List<Product> products = new List<Product>();
+            foreach (ProductStack stack in _productStacksInMemoryRepo)
+            {
+                products.Add(stack.Product);
+            }
+            return products;
         }
     }
 }

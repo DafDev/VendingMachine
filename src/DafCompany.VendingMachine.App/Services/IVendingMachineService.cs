@@ -5,8 +5,9 @@ namespace DafCompany.VendingMachine.App.Services
 {
     public interface IVendingMachineService
     {
-        void GetMoney(double money);
-        IEnumerable<Coin> GiveChange();
-        Product SellProduct(int id);
+        IEnumerable<Product> ShowProduct();
+        IEnumerable<Coin> GiveChange(double money);
+        Product ChooseProduct(int id);
+        double GetMoney(Product product, double input);
     }
 }
