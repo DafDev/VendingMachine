@@ -55,19 +55,21 @@ namespace DafCompany.VendingMachine.App.Repositories
                 return coinsToGiveBack;
             }
             int multiplicationFactor = 100; //This is a mutliplication/precision factor we'll use to manipulate int instead of doubles ofr the rest of the method
-            int intChange = (int)Math.Floor(change * multiplicationFactor);
-            List<int> coinsValuexHundred = new List<int>();
+            int intChange = (int)(change * multiplicationFactor);
+            List<int> coinValuexHundredList = new List<int>();
             foreach (CoinDenomination coinDenomination in _coinRollsInMemoryRepo.Select(d => d.Coin.Denomination).Distinct())
             {
-                coinsValuexHundred.Add((int)coinDenomination.GetDenominationValue() * multiplicationFactor);
+                double coinValuexHundred = coinDenomination.GetDenominationValue() * multiplicationFactor;
+                coinValuexHundredList.Add((int)coinValuexHundred);
             }
-            coinsValuexHundred = coinsValuexHundred.OrderByDescending(c => c).ToList();
-            foreach (var coinValue in coinsValuexHundred)
+            coinValuexHundredList = coinValuexHundredList.OrderByDescending(c => c).ToList();
+            foreach (var coinValue in coinValuexHundredList)
             {
                 if(intChange < coinValue)
                 {
                     continue;
                 }
+                
                 int res = intChange / coinValue;
                 int mod = intChange % coinValue;
                 intChange = mod;

@@ -9,5 +9,6 @@ namespace DafCompany.VendingMachine.App.Services
         IEnumerable<Coin> GiveChange(double money);
         Product ChooseProduct(int id);
         double GetMoney(Product product, double input);
+        void Run();
     }
 }

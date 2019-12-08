@@ -39,15 +39,14 @@ namespace DafCompany.VendingMachine.App.Enumerations
         {
             CustomEnumeration otherValue = obj as CustomEnumeration;
 
-            if(otherValue == null)
-            {
-                return false;
-            }
+            if (ReferenceEquals(otherValue, null)) return false;
 
-            bool typeMatches = GetType().Equals(obj.GetType());
+            if (ReferenceEquals(this, otherValue)) return true;
+
+            bool typeMatches = GetType().Equals(obj?.GetType());
             bool idMatches = Id.Equals(otherValue.Id);
-
-            return typeMatches && idMatches;
+            bool nameMatches = Name.Equals(otherValue.Name, StringComparison.InvariantCulture);
+            return typeMatches && idMatches && nameMatches;
         }
 
         public static bool operator ==(CustomEnumeration left, CustomEnumeration right)
