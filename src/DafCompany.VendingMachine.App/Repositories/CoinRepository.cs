@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DafCompany.VendingMachine.App.Enumerations;
 using DafCompany.VendingMachine.App.Loaders;
 using DafCompany.VendingMachine.App.Models;
@@ -92,7 +90,7 @@ namespace DafCompany.VendingMachine.App.Repositories
         public void PutCoins(double change)
         {
             List<Coin> coins = GetCoins(change).ToList();
-            //put coins right in the list()
+            //ToDo: put coins right in the list()
         }
 
         private CoinDenomination GetDenominationFromValue(double realCoinValue) => realCoinValue switch

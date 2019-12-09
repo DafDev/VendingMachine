@@ -10,13 +10,15 @@ namespace DafCompany.VendingMachine.App.Services
     public class VendingMachineService : IVendingMachineService
     {
         private readonly IProductRepository _productRepository;
+        private readonly ICliInterpreterService _cliInterpreterService;
         private readonly ICoinRepository _coinRepository;
 
         public VendingMachineService(ICoinRepository coinRepository,
-            IProductRepository productRepository)
+            IProductRepository productRepository, ICliInterpreterService cliInterpreterService)
         {
             _coinRepository = coinRepository;
             _productRepository = productRepository;
+            _cliInterpreterService = cliInterpreterService;
         }
         /// <summary>
         /// choose the product
@@ -58,7 +60,7 @@ namespace DafCompany.VendingMachine.App.Services
         /// show the product 
         /// </summary>
         /// <returns>A list aof product to be displayed on the CLI</returns>
-        public IEnumerable<Product> ShowProduct()
+        public IEnumerable<Product> ShowProducts()
         {
             return _productRepository.GetProducts();
         }
@@ -68,42 +70,21 @@ namespace DafCompany.VendingMachine.App.Services
         /// </summary>
         public void Run()
         {
-            Console.WriteLine($"Welcome to Daf's Vending Machine\nHere are our fabulous product!");
-            foreach (Product product in ShowProduct())
-            {
-                Console.WriteLine($"Id: {product.Id}\tName: {product.Name}\tPrice: {product.Price} €");
-            }
-            Console.WriteLine($"Type the id of the product you want to buy: ");
-            string chosenProductStringId = Console.ReadLine();
-            int chosenProductId;
-            while (!int.TryParse(chosenProductStringId, out chosenProductId))
-            {
-                Console.WriteLine($"Invalid entry!!\nType the id of the product you want to buy: ");
-                chosenProductStringId = Console.ReadLine();
-            }
-            Product chosenProduct = ChooseProduct(chosenProductId);
-            if (chosenProduct != null)
-            {
-                Console.WriteLine($"You chose a {chosenProduct.Name} which costs {chosenProduct.Price} euros");
-                Console.WriteLine("Pay up!");
-                double inputMoney;
-                while (!double.TryParse(Console.ReadLine(), out inputMoney))
-                {
-                    Console.WriteLine($"Invalid entry!!\nI don't accept monkey change");
-                }
-                Console.WriteLine($"Here is your {chosenProduct.Name} and your change which consists in");
-                IEnumerable<Coin> change = GiveChange(GetMoney(chosenProduct, inputMoney));
-                foreach (Coin coin in change.Select(c => c).Distinct())
-                {
-                    Console.WriteLine($"{change.Where(c => c.Value == coin.Value).Count()} " +
-                        $"coin(s) of {coin.Denomination.ToString()}");
-                }
-                Console.WriteLine($"For a total of {inputMoney - chosenProduct.Price} euros");
-            }
-            else
+            IEnumerable<Product> products = ShowProducts();
+            Product chosenProduct = ChooseProduct(
+                _cliInterpreterService.GetProductIdFromClient(products));
+            while (chosenProduct == null)
             {
                 Console.WriteLine("This product doesn't exist!");
+                chosenProduct = ChooseProduct(
+                    _cliInterpreterService.GetProductIdFromClient(products));
             }
+            Console.WriteLine($"You chose a {chosenProduct.Name} which costs {chosenProduct.Price} euros");
+            Console.WriteLine("Pay up!");
+            double inputMoney = _cliInterpreterService.CheckInputMoney(chosenProduct.Price);
+            Console.WriteLine($"Here is your {chosenProduct.Name} and your change which consists in");
+            _cliInterpreterService.PrintChange(GiveChange(GetMoney(chosenProduct, inputMoney)));
+            Console.WriteLine($"For a total of {inputMoney - chosenProduct.Price} euros");
             Console.ReadLine();
         }
     }

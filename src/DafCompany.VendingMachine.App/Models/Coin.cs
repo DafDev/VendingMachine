@@ -16,7 +16,6 @@ namespace DafCompany.VendingMachine.App.Models
 
         public bool Equals(Coin other)
         {
-
             //Check whether the compared object is null. 
             if (ReferenceEquals(other, null)) return false;
 
@@ -31,7 +30,6 @@ namespace DafCompany.VendingMachine.App.Models
         // then GetHashCode() must return the same value for these objects. 
         public override int GetHashCode()
         {
-
             //Get hash code for the Name field if it is not null. 
             int hashCoinDenomination = Denomination == null ? 0 : Denomination.Name.GetHashCode();
 
