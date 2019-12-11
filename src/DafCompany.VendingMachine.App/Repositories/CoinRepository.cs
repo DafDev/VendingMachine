@@ -82,7 +82,15 @@ namespace DafCompany.VendingMachine.App.Repositories
             double realCoinValue = (double)coinValue / multiplicationFactor;
             for (int i = 0; i < numberOfCoins; i++)
             {
-                coins.Add(new Coin(GetDenominationFromValue(realCoinValue), realCoinValue));
+                CoinDenomination coinDenomination = GetDenominationFromValue(realCoinValue);
+                if (_coinRollsInMemoryRepo
+                        .First(c => c.Coin.Denomination == coinDenomination).Count > 0)
+                {
+                    coins.Add(new Coin(coinDenomination, realCoinValue));
+                    _coinRollsInMemoryRepo
+                        .First(c => c.Coin.Denomination == coinDenomination).Count--;
+                }
+
             }
             return coins;
         }
@@ -93,18 +101,21 @@ namespace DafCompany.VendingMachine.App.Repositories
             //ToDo: put coins right in the list()
         }
 
-        private CoinDenomination GetDenominationFromValue(double realCoinValue) => realCoinValue switch
+        private static CoinDenomination GetDenominationFromValue(double realCoinValue)
         {
-            0.01 => CoinDenomination.Cent1,
-            0.02 => CoinDenomination.Cent2,
-            0.05 => CoinDenomination.Cent5,
-            0.1 => CoinDenomination.Cent10,
-            0.2 => CoinDenomination.Cent20,
-            0.5 => CoinDenomination.Cent50,
-            1 => CoinDenomination.Euro1,
-            2 => CoinDenomination.Euro2,
+            return realCoinValue switch
+            {
+                0.01 => CoinDenomination.Cent1,
+                0.02 => CoinDenomination.Cent2,
+                0.05 => CoinDenomination.Cent5,
+                0.1 => CoinDenomination.Cent10,
+                0.2 => CoinDenomination.Cent20,
+                0.5 => CoinDenomination.Cent50,
+                1 => CoinDenomination.Euro1,
+                2 => CoinDenomination.Euro2,
 
-            _ => new CoinDenomination("Not a coin", 100),
-        };
+                _ => new CoinDenomination("Not a coin", 100),
+            };
+        }
     }
 }
